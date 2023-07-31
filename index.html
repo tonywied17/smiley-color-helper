@@ -1,0 +1,873 @@
+<!--
+File: c:\Users\tonyw\AppData\Local\Temp\scp21082\public_html\files\2023\July\30\_d7A\colors.html
+Project: c:\Users\tonyw\AppData\Local\Temp\scp21082\public_html\files\2023\July\30\_d7A
+Created Date: Monday July 31st 2023
+Author: Tony Wiedman
+-----
+Last Modified: Mon July 31st 2023 6:16:14 
+Modified By: Tony Wiedman
+-----
+Copyright (c) 2023 Tone Web Design, Molex
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      html,
+      body {
+        max-width: 100vw;
+        overflow: hidden;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgb(24, 24, 24);
+        color: rgb(207, 207, 207);
+        font-family: "Roboto", sans-serif;
+        display: flex;
+      }
+
+      .navbar {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1;
+      }
+
+      .right-column {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .image-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .nav-buttons {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-button,
+      .color-picker,
+      .reset-button,
+      .toggle-button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        color: #cfcfcf;
+        padding: 6px 12px;
+        border-radius: 4px;
+        background-color: rgba(50, 50, 50, 1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s;
+        margin: 5px;
+        font-size: 11px;
+      }
+
+      .nav-button:hover,
+      .color-picker:hover,
+      .reset-button:hover,
+      .toggle-button:hover {
+        background-color: rgba(60, 60, 60, 1);
+      }
+
+      .nav-button:active,
+      .color-picker:active,
+      .reset-button:active,
+      .toggle-button:active {
+        background-color: rgba(40, 40, 40, 1);
+      }
+
+      .colors-container {
+        width: 360px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .colors-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 2;
+      }
+
+      .colors-wrapper.two-columns {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .colors-wrapper.two-columns .color-box {
+        flex: 0 0 calc(50% - 10px);
+        margin-right: 10px;
+        margin-top: 10px;
+      }
+
+      .colors-wrapper.two-columns .color-box:nth-child(2n) {
+        margin-right: 0;
+      }
+
+      .color-box {
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        margin-top: 1em;
+        flex: 0 0 100%;
+        box-sizing: border-box;
+      }
+
+      .two-columns {
+        flex-direction: column;
+      }
+
+      .two-columns .color-box {
+        flex: 0 0 48%;
+      }
+
+      .color-header {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 5px 5px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        background-color: rgba(24, 24, 24, 0.8);
+        color: #fff;
+        font-weight: bold;
+      }
+
+      .color-text {
+        display: block;
+        margin: 10px;
+      }
+
+      .left-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .toggle-button {
+        display: block;
+        margin: auto;
+      }
+
+      img {
+        width: auto;
+        max-height: 90%;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .light-text {
+        color: #000;
+      }
+
+      select {
+        appearance: none;
+        background-color: rgba(50, 50, 50, 1);
+        background: linear-gradient(
+          180deg,
+          rgba(50, 50, 50, 1) 0%,
+          rgba(30, 30, 30, 1) 100%
+        );
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 14px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s;
+        margin: 5px;
+        cursor: pointer;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"><path d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8 5.707 5.354 8.354a.5.5 0 1 1-.708-.708l3-3z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        font-weight: 700;
+      }
+
+      option {
+        background-color: rgba(50, 50, 50, 1);
+        color: #fff;
+      }
+
+      select:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 #000;
+      }
+
+      select::-ms-expand {
+        background-color: rgba(50, 50, 50, 1);
+        color: #fff;
+      }
+
+      select:hover {
+        background: linear-gradient(
+          180deg,
+          rgba(60, 60, 60, 1) 0%,
+          rgba(40, 40, 40, 1) 100%
+        );
+      }
+
+      select:active {
+        background: linear-gradient(
+          180deg,
+          rgba(40, 40, 40, 1) 0%,
+          rgba(20, 20, 20, 1) 100%
+        );
+      }
+
+      .select-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+
+      .select-wrapper select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: rgba(50, 50, 50, 1);
+        color: #fff;
+        border: none;
+        padding-right: 30px;
+      }
+
+      .select-wrapper:after {
+        content: "\25BC";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #fff;
+        font-size: 10px;
+      }
+
+      .popup-message {
+        background-color: rgba(78, 253, 171, 0.685);
+        color: #303030;
+        padding: 8px 12px;
+        border-radius: 4px;
+        box-shadow: 0 2px rgba(25, 184, 117, 0.9);
+        font-size: 14px;
+        display: none;
+        z-index: 2;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out;
+        max-width: fit-content;
+        position: absolute;
+        top: 62px;
+        right: 25px;
+      }
+
+      .popup-message.show {
+        display: inline-block;
+        opacity: 1;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <div class="left-column">
+      <div class="colors-container" id="colors-container">
+        <div class="color-controls">
+          <div class="popup-message" id="popup-message"></div>
+
+          <button
+            class="toggle-button"
+            style="font-size: 0.9rem; font-weight: 300; margin-bottom: 1em"
+            onclick="toggleColumns()"
+          >
+            <i
+              class="fa-solid fa-table-columns"
+              style="margin-right: 0.25rem"
+            ></i>
+            Toggle Columns
+          </button>
+        </div>
+        <div class="colors-wrapper" id="colors-wrapper"></div>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="image-container">
+        <img src="" alt="Image" id="image-container" />
+        <div class="select-wrapper">
+          <select id="image-select" onchange="changeImage()"></select>
+        </div>
+
+        <div class="button-container">
+          <button
+            class="upload-button nav-button"
+            style="font-size: 0.9rem; font-weight: 300"
+            onclick="uploadImage()"
+          >
+          <i class="fa-solid fa-cloud-arrow-up" style="margin-right:0.25rem;"></i> Upload Image
+          </button>
+
+          <input type="file" id="file-input" style="display: none" />
+
+          <button
+            class="nav-button"
+            style="font-size: 0.9rem; font-weight: 300"
+            onclick="deleteImage()"
+          >
+          <i class="fa-solid fa-trash-can" style="margin-right:0.25rem;"></i> Delete Selected Image
+          </button>
+        </div>
+
+        <div class="navbar">
+          <div class="nav-buttons">
+            <button
+              class="export-button nav-button"
+              style="font-size: 0.9rem; font-weight: 300"
+              id="export-btn"
+              onclick="exportPaletteAsPNG()"
+            >
+              <i class="fa-solid fa-image" style="margin-right: 0.25rem"></i>
+              Export Swatch PNG
+            </button>
+
+            <button
+              class="save-button nav-button"
+              style="font-size: 0.9rem; font-weight: 300"
+              onclick="createNewPalette()"
+            >
+              <i class="fa-solid fa-palette" style="margin-right: 0.25rem"></i>
+              New Palette
+            </button>
+
+            <button
+              class="save-button nav-button"
+              style="font-size: 0.9rem; font-weight: 300"
+              id="save-btn"
+              onclick="saveColorPalette()"
+            >
+              <i
+                class="fa-regular fa-floppy-disk"
+                style="margin-right: 0.25rem"
+              ></i>
+              Save Palette
+            </button>
+            <button
+              class="remove-button nav-button"
+              style="font-size: 0.9rem; font-weight: 300"
+              id="remove-btn"
+              onclick="removeColorPalette()"
+            >
+              <i class="fa-solid fa-xmark" style="margin-right: 0.25rem"></i>
+              Remove Palette
+            </button>
+            <div class="select-wrapper">
+              <select id="color-select" onchange="selectColorPalette()">
+                <option value="default">Default Palette</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const colors = [
+        "#889ad8",
+        "#8da4c3",
+        "#a2c4cf",
+        "#a2cfcd",
+        "#aad4c2",
+        "#b7dac0",
+        "#c6dbba",
+        "#d9e2c5",
+        "#cfcda5",
+        "#c8b396",
+        "#cca79c",
+        "#cfa2a7",
+        "#c691aa",
+        "#bb7eb1",
+        "#9a59a8",
+        "#8461ac",
+      ];
+
+      function updateFontColor(colorBox) {
+        const colorText = colorBox.querySelector(".color-text");
+        const colorPickerBtn = colorBox.querySelector(".color-picker");
+        const resetBtn = colorBox.querySelector(".reset-button");
+
+        const bgColor = window.getComputedStyle(colorBox).backgroundColor;
+        const bgColorRGB = bgColor.match(/\d+/g);
+
+        const luminance =
+          (0.299 * bgColorRGB[0] +
+            0.587 * bgColorRGB[1] +
+            0.114 * bgColorRGB[2]) /
+          255;
+
+        const fontColor = luminance > 0.5 ? "#000" : "#fff";
+
+        colorText.style.color = fontColor;
+
+        if (!colorPickerBtn.classList.contains("no-update-font-color")) {
+          colorPickerBtn.style.color = fontColor;
+        }
+
+        if (!resetBtn.classList.contains("no-update-font-color")) {
+          resetBtn.style.color = fontColor;
+        }
+      }
+
+      function toggleColumns() {
+        const container = document.getElementById("colors-wrapper");
+        container.classList.toggle("two-columns");
+      }
+
+      function populateSelectBox() {
+        const colorSelect = document.getElementById("color-select");
+        const savedColorPalettes =
+          JSON.parse(localStorage.getItem("colorPalettes")) || [];
+
+        colorSelect.innerHTML = `
+      <option value="default">Default Palette</option>
+      ${savedColorPalettes
+        .map(
+          (palette, index) =>
+            `<option value="${index}">Palette ${index + 1}</option>`
+        )
+        .join("")}
+    `;
+
+        const selectedIndex =
+          localStorage.getItem("selectedPaletteIndex") || "default";
+        colorSelect.value = selectedIndex;
+      }
+
+      function pickColor(index) {
+        const input = document.getElementById(`color-input-${index}`);
+        const colorBox = document.getElementsByClassName("color-box")[index];
+
+        input.click();
+        input.addEventListener("input", function () {
+          const newColor = this.value;
+          colorBox.style.backgroundColor = newColor;
+          const colorText = colorBox.querySelector(".color-text");
+          colorText.textContent = newColor;
+          updateFontColor(colorBox);
+        });
+      }
+
+      function saveColorPalette() {
+        const colorSelect = document.getElementById("color-select");
+        const selectedIndex = colorSelect.value;
+
+        if (selectedIndex === "default") {
+          createNewPalette();
+        } else {
+          const currentPalette = [];
+          const colorBoxes = document.getElementsByClassName("color-box");
+          for (const box of colorBoxes) {
+            const colorText = box.querySelector(".color-text").textContent;
+            currentPalette.push(colorText);
+          }
+
+          savedColorPalettes[selectedIndex] = currentPalette;
+          localStorage.setItem(
+            "colorPalettes",
+            JSON.stringify(savedColorPalettes)
+          );
+        }
+
+        localStorage.setItem("selectedPaletteIndex", selectedIndex);
+
+        showPopupMessage("Palette Saved!");
+
+        populateSelectBox();
+      }
+
+      function createNewPalette() {
+        const newPalette = colors.slice();
+        savedColorPalettes.push(newPalette);
+        localStorage.setItem(
+          "colorPalettes",
+          JSON.stringify(savedColorPalettes)
+        );
+        const colorSelect = document.getElementById("color-select");
+
+        const newOption = document.createElement("option");
+        newOption.value = savedColorPalettes.length - 1;
+        newOption.textContent = `Palette ${savedColorPalettes.length}`;
+        colorSelect.appendChild(newOption);
+
+        colorSelect.value = savedColorPalettes.length - 1;
+
+        selectColorPalette();
+        disableCheck();
+      }
+
+      function removeColorPalette() {
+        const colorSelect = document.getElementById("color-select");
+        const selectedIndex = colorSelect.value;
+
+        if (selectedIndex !== "default") {
+          savedColorPalettes.splice(selectedIndex, 1);
+          localStorage.setItem(
+            "colorPalettes",
+            JSON.stringify(savedColorPalettes)
+          );
+
+          let newSelectedIndex;
+          if (selectedIndex > 0) {
+            newSelectedIndex = selectedIndex - 1;
+          } else {
+            newSelectedIndex = "default";
+          }
+
+          localStorage.setItem("selectedPaletteIndex", newSelectedIndex);
+          populateSelectBox();
+          selectColorPalette();
+          disableCheck();
+        }
+      }
+
+      function selectColorPalette() {
+        const colorSelect = document.getElementById("color-select");
+        const selectedIndex = colorSelect.value;
+
+        if (selectedIndex === "default") {
+          currentPaletteColors = colors.slice();
+          colors.forEach((color, index) => {
+            resetColor(index);
+          });
+        } else {
+          const selectedPalette = savedColorPalettes[selectedIndex];
+          if (selectedPalette) {
+            currentPaletteColors = selectedPalette.slice();
+            const colorBoxes = document.getElementsByClassName("color-box");
+            for (let i = 0; i < colorBoxes.length; i++) {
+              const colorBox = colorBoxes[i];
+              const colorText = colorBox.querySelector(".color-text");
+              colorBox.style.backgroundColor = selectedPalette[i];
+              colorText.textContent = selectedPalette[i];
+            }
+          }
+        }
+      }
+
+      function updateAllFontColors() {
+        const colorBoxes = document.getElementsByClassName("color-box");
+        for (let i = 0; i < colorBoxes.length; i++) {
+          updateFontColor(colorBoxes[i]);
+        }
+      }
+
+      function resetColor(index) {
+        const colorBox = document.getElementsByClassName("color-box")[index];
+        const colorText = colorBox.querySelector(".color-text");
+        colorBox.style.backgroundColor = currentPaletteColors[index];
+        colorText.textContent = currentPaletteColors[index];
+        updateFontColor(colorBox);
+      }
+
+      function toggleColumns() {
+        const container = document.getElementById("colors-wrapper");
+        container.classList.toggle("two-columns");
+      }
+
+      function showPopupMessage(message) {
+        const popupMessage = document.getElementById("popup-message");
+        popupMessage.textContent = message;
+        popupMessage.classList.add("show");
+
+        setTimeout(() => {
+          popupMessage.classList.remove("show");
+        }, 2000);
+      }
+
+      function changeImage() {
+        const imageSelect = document.getElementById("image-select");
+        const selectedImage = imageSelect.value;
+        const imageContainer = document.getElementById("image-container");
+        imageContainer.src = `./smileys/${selectedImage}`;
+      }
+
+      fetch("./get_images.php")
+        .then((response) => response.json())
+        .then((imageFiles) => {
+          const imageSelect = document.getElementById("image-select");
+          imageFiles.forEach((file, index) => {
+            const option = document.createElement("option");
+            option.value = file;
+            option.text = file;
+            imageSelect.appendChild(option);
+
+            if (index === 0) {
+              const imageContainer = document.getElementById("image-container");
+              imageContainer.src = `./smileys/${file}`;
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("An error occurred:", error);
+        });
+
+      let savedColorPalettes =
+        JSON.parse(localStorage.getItem("colorPalettes")) || [];
+      const container = document.getElementById("colors-wrapper");
+      let currentPaletteColors = colors.slice();
+
+      colors.forEach((color, index) => {
+        const colorBox = document.createElement("div");
+        colorBox.className = "color-box";
+        colorBox.style.backgroundColor = color;
+        colorBox.innerHTML = `
+        <div class="color-header">Color ${index + 1}</div>
+        <span class="color-text">${color}</span>
+        <button class="color-picker no-update-font-color" onclick="pickColor(${index})">
+          <i class="fa-solid fa-eye-dropper" style="margin-right:0.25rem;"></i> Pick Color
+        </button>
+        <button class="reset-button no-update-font-color" onclick="resetColor(${index})">
+          <i class="fa-solid fa-rotate-left" style="margin-right:0.25rem;"></i> Reset
+        </button>
+        <input type="color" value="${color}" style="display:none;" id="color-input-${index}">
+      `;
+        container.appendChild(colorBox);
+
+        updateFontColor(colorBox);
+      });
+      const colorBoxes = document.getElementsByClassName("color-box");
+      for (let i = 0; i < colorBoxes.length; i++) {
+        updateFontColor(colorBoxes[i]);
+      }
+
+      window.addEventListener("load", () => {
+        populateSelectBox();
+        populateImageDropdown();
+        const colorSelect = document.getElementById("color-select");
+        const selectedIndex =
+          localStorage.getItem("selectedPaletteIndex") || "default";
+        colorSelect.value = selectedIndex;
+        selectColorPalette();
+        updateAllFontColors();
+        disableCheck();
+      });
+
+      const colorSelect = document.getElementById("color-select");
+
+      colorSelect.addEventListener("change", function () {
+        disableCheck();
+      });
+
+      function disableCheck() {
+        const saveButton = document.querySelector(".save-button");
+        const removeButton = document.querySelector(".remove-button");
+        const selectedIndex = colorSelect.value;
+
+        if (selectedIndex === "default") {
+          document.getElementById("save-btn").disabled = true;
+          document.getElementById("save-btn").style.cursor = "not-allowed";
+          document.getElementById("save-btn").style.opacity = "0.5";
+
+          document.getElementById("remove-btn").disabled = true;
+          document.getElementById("remove-btn").style.cursor = "not-allowed";
+          document.getElementById("remove-btn").style.opacity = "0.5";
+        } else {
+          document.getElementById("save-btn").disabled = false;
+          document.getElementById("save-btn").style.cursor = "pointer";
+          document.getElementById("save-btn").style.opacity = "1";
+
+          document.getElementById("remove-btn").disabled = false;
+          document.getElementById("remove-btn").style.cursor = "pointer";
+          document.getElementById("remove-btn").style.opacity = "1";
+        }
+      }
+
+      function exportPaletteAsPNG() {
+        const paletteColors = getCurrentPaletteColors();
+        const canvas = document.createElement("canvas");
+        const tileSize = 45;
+        canvas.width = 720;
+        canvas.height = 720;
+
+        const ctx = canvas.getContext("2d");
+
+        ctx.translate(0.5, 0.5);
+        for (let row = 0; row < 16; row++) {
+          const color = paletteColors[row % paletteColors.length];
+          for (let col = 0; col < 16; col++) {
+            ctx.fillStyle = color;
+            ctx.fillRect(col * tileSize, row * tileSize, tileSize, tileSize);
+          }
+        }
+
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 16; i++) {
+          ctx.beginPath();
+          ctx.moveTo(i * tileSize, 0);
+          ctx.lineTo(i * tileSize, canvas.height);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, i * tileSize);
+          ctx.lineTo(canvas.width, i * tileSize);
+          ctx.stroke();
+        }
+
+        const link = document.createElement("a");
+        link.download = "color_palette.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }
+
+      function getCurrentPaletteColors() {
+        const colorBoxes = document.getElementsByClassName("color-box");
+        const currentPaletteColors = [];
+        for (const box of colorBoxes) {
+          const colorText = box.querySelector(".color-text").textContent;
+          currentPaletteColors.push(colorText);
+        }
+        return currentPaletteColors;
+      }
+
+      function uploadImage() {
+        const fileInput = document.getElementById("file-input");
+        fileInput.click();
+
+        fileInput.addEventListener("change", function () {
+          const file = fileInput.files[0];
+          const formData = new FormData();
+          formData.append("image", file);
+
+          fetch("./upload_image.php", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.text();
+            })
+            .then((data) => {
+              try {
+                const parsedData = JSON.parse(data);
+                if (parsedData.success) {
+                  const imageContainer =
+                    document.getElementById("image-container");
+                  imageContainer.src = `./smileys/${parsedData.fileName}`;
+
+                  populateImageDropdown(parsedData.fileName);
+                } else {
+                  console.error("Error uploading image:", parsedData.error);
+                }
+              } catch (error) {
+                console.error("JSON parsing error:", error);
+              }
+            })
+            .catch((error) => {
+              console.error("An error occurred:", error);
+            });
+        });
+      }
+
+      function populateImageDropdown(selectedFileName) {
+        fetch("./get_images.php")
+          .then((response) => response.json())
+          .then((imageFiles) => {
+            const imageSelect = document.getElementById("image-select");
+            imageSelect.innerHTML = "";
+
+            imageFiles.forEach((file, index) => {
+              const option = document.createElement("option");
+              option.value = file;
+              option.text = file;
+              imageSelect.appendChild(option);
+
+              if (file === selectedFileName) {
+                imageSelect.selectedIndex = index;
+                const imageContainer =
+                  document.getElementById("image-container");
+                imageContainer.src = `./smileys/${file}`;
+              }
+            });
+          })
+          .catch((error) => {
+            console.error("An error occurred:", error);
+          });
+      }
+
+      function deleteImage() {
+        const imageSelect = document.getElementById("image-select");
+        const selectedFileName = imageSelect.value;
+
+        if (confirm("Are you sure you want to delete the selected image?")) {
+          fetch("./delete_image.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `image=${encodeURIComponent(selectedFileName)}`,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                const selectedIndex = imageSelect.selectedIndex;
+
+                populateImageDropdown(selectedFileName);
+                const imageContainer =
+                  document.getElementById("image-container");
+                imageContainer.src = "";
+
+                const firstImageFileName = imageSelect.options[0].value;
+                imageContainer.src = `./smileys/${firstImageFileName}`;
+
+                imageSelect.selectedIndex = 0;
+
+                console.log(data.message);
+              } else {
+                console.error("Error deleting image:", data.error);
+              }
+            })
+            .catch((error) => {
+              console.error("An error occurred:", error);
+            });
+        }
+      }
+
+      populateSelectBox();
+    </script>
+  </body>
+</html>
